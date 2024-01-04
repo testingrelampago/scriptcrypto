@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Web3Connector from './components/Web3Connector';
+import CrowdfundingContract from './components/CrowdfundingContract';
+import FundraisingInfo from './components/FundraisingInfo';
+import ContributeForm from './components/ContributeForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [web3, setWeb3] = useState(null);
+    const [contract, setContract] = useState(null);
+
+    return (
+        <div className="App">
+            <Web3Connector setWeb3={setWeb3} />
+            {web3 && <CrowdfundingContract web3={web3} setContract={setContract} />}
+            {contract && <FundraisingInfo contract={contract} />}
+            {contract && <ContributeForm contract={contract} />}
+        </div>
+    );
 }
 
 export default App;
