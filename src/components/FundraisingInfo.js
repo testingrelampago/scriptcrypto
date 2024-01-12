@@ -4,21 +4,25 @@ const FundraisingInfo = ({ contract }) => {
     const [totalAmountRaised, setTotalAmountRaised] = useState(0);
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Get total amount raised
+                const totalRaised = await contract.methods.totalAmountRaised().call();
+                setTotalAmountRaised(totalRaised);
+            } catch (error) {
+                console.error('Error fetching fundraising data from the smart contract:', error);
+            }
+        };
+
         if (contract) {
-            contract.methods.getTotalAmountRaised().call()
-                .then(result => {
-                    setTotalAmountRaised(result);
-                })
-                .catch(error => {
-                    console.error('Error getting total amount raised:', error);
-                });
+            fetchData();
         }
     }, [contract]);
 
     return (
         <div>
             <h2>Fundraising Information</h2>
-            <p>Total Amount Raised: <span className="font-weight-bold">{totalAmountRaised} ETH</span></p>
+            <p>Total Amount Raised: {totalAmountRaised} ETH</p>
         </div>
     );
 };

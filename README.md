@@ -45,3 +45,6 @@ cd scriptcrypto-react
 
 # Step 3: Install Dependencies
 npm install web3 bootstrap
+
+# Step x: When you make npm start, if you have an error, use this command:
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
