@@ -36,15 +36,18 @@ This project is a decentralized application (DApp) for crowdfunding using Ethere
 ## Installing
 
 ```bash
-# Step 1: Set Up Development Environment
+# Command 1: Set Up Development Environment
 npm init -y
 
-# Step 2: Create React App
+# Command 2: Create React App
 npx create-react-app scriptcrypto-react
 cd scriptcrypto-react
 
-# Step 3: Install Dependencies
+# Command 3: Install Dependencies
 npm install web3 bootstrap
 
-# Step x: When you make npm start, if you have an error, use this command:
+# Command 4: When you make npm start, if you have an error, use this command:
 $env:NODE_OPTIONS = "--openssl-legacy-provider"
+
+# Command 4: To start the server
+npm start
