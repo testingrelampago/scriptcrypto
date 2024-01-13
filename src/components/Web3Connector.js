@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ContributionSection from './ContributionSection';
 
 import Web3 from 'web3';
-const web3 = new Web3();
 
 const Web3Connector = ({ setWeb3, setContract }) => {
   useEffect(() => {
@@ -11,15 +10,14 @@ const Web3Connector = ({ setWeb3, setContract }) => {
       if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
         try {
-          await window.ethereum.enable();
-          const accounts = await window.web3.eth.getAccounts();
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-          console.log('Connected to Ethereum');
-          console.log('User Account:', accounts[0]);
+          console.log('Connected to Ethereum :)');
+          console.log('User Account (Address):', accounts[0]);
 
           setWeb3(window.web3);
 
-          const contractAddress = '0x46cD9652AdF68f1d5025eB988649419F8a60D237';
+          const contractAddress = '0x831f4b4116859eFe6Bd83284bf10D8e7D1220c9f';
           const contractAbi = [
             {
                 "inputs": [],

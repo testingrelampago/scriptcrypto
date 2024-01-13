@@ -33,7 +33,7 @@ This project is a decentralized application (DApp) for crowdfunding using Ethere
 4. Get the deployed smart contract address and ABI.
 5. Update CrowdfundingContract.js in your React app with the contract address and ABI.
 
-## Installing
+## Installing / Commands
 
 ```bash
 # Command 1: Set Up Development Environment

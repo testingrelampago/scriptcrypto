@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div className="App">
-            <Web3Connector setWeb3={setWeb3} />
+            <Web3Connector setWeb3={setWeb3} setContract={setContract} />
             {web3 && <CrowdfundingContract web3={web3} setContract={setContract} />}
             {contract && <FundraisingInfo contract={contract} />}
             {contract && <ContributeForm contract={contract} />}
