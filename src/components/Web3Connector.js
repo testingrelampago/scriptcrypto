@@ -20,7 +20,47 @@ const Web3Connector = ({ setWeb3, setContract }) => {
           setWeb3(window.web3);
 
           const contractAddress = '0x46cD9652AdF68f1d5025eB988649419F8a60D237';
-          const contractAbi = [/* ... */];
+          const contractAbi = [
+            {
+                "inputs": [],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "inputs": [],
+                "name": "contribute",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "owner",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "totalAmountRaised",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+            // ... (Añade otros métodos según sea necesario)
+        ];
 
           const crowdfundingContract = new window.web3.eth.Contract(contractAbi, contractAddress);
           setContract(crowdfundingContract);
