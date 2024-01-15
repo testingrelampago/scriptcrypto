@@ -11,7 +11,7 @@ function App() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container">
             <Link className="navbar-brand" to="/">
-              Your App
+              Fund me App
             </Link>
             <button
               className="navbar-toggler"

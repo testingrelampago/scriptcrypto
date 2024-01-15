@@ -78,21 +78,23 @@ const ContributionSection = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Contribution Section</h2>
-      <label>
-        Amount (ETH):
-        <input
-          type="number"
-          value={contributionAmount}
-          onChange={(e) => setContributionAmount(e.target.value)}
-        />
-      </label>
-      <button onClick={handleContribution}>Contribute</button>
+      <div className="jumbotron">
+        <h2 className="display-4">Contribution Section</h2>
+          <label className="lead">
+          Amount (ETH):
+          <input class="form-control"
+            type="number"
+            value={contributionAmount}
+            onChange={(e) => setContributionAmount(e.target.value)}
+          />
+        </label>
+        <a class="btn btn-primary btn-lg" onClick={handleContribution} role="button">Contribute</a>
 
-      {/* Mostrar información actualizada del contrato */}
-      <div>
-        <h3>Fundraising Information</h3>
-        <p>Total Amount Raised: {totalAmountRaised} ETH</p>
+        {/* Mostrar información actualizada del contrato */}
+        <div>
+          <h3 className="display-4">Fundraising Information</h3>
+          <p className="lead">Total Amount Raised: {totalAmountRaised} ETH</p>
+        </div>
       </div>
     </div>
   );
