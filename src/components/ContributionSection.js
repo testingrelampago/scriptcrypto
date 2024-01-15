@@ -53,20 +53,22 @@ const ContributionSection = () => {
     }
   }, [contract, web3]);
 
-  // UseEffect para llamar a la función de actualización después de cada contribución
+  // UseEffect for calling to the function after the contribution
   useEffect(() => {
     updateContractInformation();
-  }, [contract, updateContractInformation]); // Se ejecutará cada vez que el contrato cambie
+  }, [contract, updateContractInformation]);
 
   const handleContribution = async () => {
     try {
       if (contract) {
+        
+        console.log('Selected Account:', accounts[0]);
+
         await contract.methods.contribute().send({
           from: accounts[0],
           value: web3.utils.toWei(contributionAmount, 'ether'),
         });
 
-        // Después de la contribución, llamar a la función de actualización
         updateContractInformation();
       }
     } catch (error) {
