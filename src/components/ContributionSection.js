@@ -1,9 +1,42 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
 import Web3 from 'web3';
-const web3 = new Web3();
+import contractConfig from './../contractConfig';
 
-const ContributionSection = ({ contract, accounts }) => {
+const ContributionSection = () => {
+  const [contract, setContract] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [web3, setWeb3] = useState(null);
+
+  useEffect(() => {
+    const connectToWeb3 = async () => {
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        try {
+          const accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+          console.log('Connected to Ethereum :)');
+          console.log('User Account (Address):', accs[0]);
+
+          setAccounts(accs);
+          setWeb3(window.web3);
+
+          const crowdfundingContract = new window.web3.eth.Contract(
+            contractConfig.contractAbi,
+            contractConfig.contractAddress
+          );
+
+          setContract(crowdfundingContract);
+        } catch (error) {
+          console.error('Error connecting to Ethereum:', error);
+        }
+      } else {
+        console.error('MetaMask not detected!');
+      }
+    };
+
+    connectToWeb3();
+  }, []);
+
   const [contributionAmount, setContributionAmount] = useState('1');
   const [totalAmountRaised, setTotalAmountRaised] = useState(0);
 
@@ -11,12 +44,14 @@ const ContributionSection = ({ contract, accounts }) => {
   const updateContractInformation = useCallback(async () => {
     try {
       // Llamar a los métodos del contrato para obtener información actualizada
-      const totalRaised = await contract.methods.totalAmountRaised().call();
-      setTotalAmountRaised(web3.utils.fromWei(totalRaised, 'ether'));
+      if (contract) {
+        const totalRaised = await contract.methods.totalAmountRaised().call();
+        setTotalAmountRaised(web3.utils.fromWei(totalRaised, 'ether'));
+      }
     } catch (error) {
       console.error('Error updating contract information:', error);
     }
-  }, [contract]);
+  }, [contract, web3]);
 
   // UseEffect para llamar a la función de actualización después de cada contribución
   useEffect(() => {
@@ -25,14 +60,15 @@ const ContributionSection = ({ contract, accounts }) => {
 
   const handleContribution = async () => {
     try {
-      await contract.methods.contribute().send({
-        from: accounts[0],
-        value: web3.utils.toWei(contributionAmount, 'ether'),
-      });
+      if (contract) {
+        await contract.methods.contribute().send({
+          from: accounts[0],
+          value: web3.utils.toWei(contributionAmount, 'ether'),
+        });
 
-      // Después de la contribución, llamar a la función de actualización
-      updateContractInformation();
-
+        // Después de la contribución, llamar a la función de actualización
+        updateContractInformation();
+      }
     } catch (error) {
       console.error('Error contributing to the smart contract:', error);
     }
