@@ -77,7 +77,7 @@ const ContributionSection = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-5">
       <h2>Contribution Section</h2>
       <label>
         Amount (ETH):
