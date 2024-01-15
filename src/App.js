@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ContributionSection from './components/ContributionSection';
 import HomeSection from './components/HomeSection';
+import CryptoPrices from './components/CryptoPrices';
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
                     Contribute
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/crypto-prices">
+                    Crypto Prices
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -45,6 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeSection />} />
           <Route path="/contribute" element={<ContributionSection />} />
+          <Route path="/crypto-prices" element={<CryptoPrices />} />
         </Routes>
       </Router>
     </div>

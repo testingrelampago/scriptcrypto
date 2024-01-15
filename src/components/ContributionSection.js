@@ -82,13 +82,13 @@ const ContributionSection = () => {
         <h2 className="display-4">Contribution Section</h2>
           <label className="lead">
           Amount (ETH):
-          <input class="form-control"
+          <input className="form-control"
             type="number"
             value={contributionAmount}
             onChange={(e) => setContributionAmount(e.target.value)}
           />
         </label>
-        <a class="btn btn-primary btn-lg" onClick={handleContribution} role="button">Contribute</a>
+        <button type="button" className="btn btn-primary btn-lg" onClick={handleContribution}>Contribute</button>
 
         {/* Mostrar información actualizada del contrato */}
         <div>
